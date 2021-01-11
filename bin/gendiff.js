@@ -2,7 +2,7 @@
 import { Command } from 'commander';
 import path from 'path';
 import fs from 'fs';
-import genDiff from "../src/gendiff.js";
+import genDiff from '../src/gendiff.js';
 
 const program = new Command();
 
@@ -11,11 +11,11 @@ program
   .description('Compares two configuration files and shows a difference.')
   .arguments('<filepath1> <filepath2>')
   .option('-f, --format [type]', 'output format')
-  .action(function (filepath1, filepath2) {
+  .action((filepath1, filepath2) => {
     const absolutePath1 = path.resolve(filepath1);
     const absolutePath2 = path.resolve(filepath2);
-    const data1 = fs.readFileSync(absolutePath1);
-    const data2 = fs.readFileSync(absolutePath2);
+    const data1 = fs.readFileSync(absolutePath1, 'utf-8');
+    const data2 = fs.readFileSync(absolutePath2, 'utf-8');
     console.log(genDiff(data1, data2));
   });
 
