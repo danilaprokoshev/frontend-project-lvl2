@@ -26,6 +26,7 @@
   "homepage": "https://github.com/danilaprokoshev/frontend-project-lvl2#readme",
   "dependencies": {
     "commander": "^6.2.1",
+    "js-yaml": "^4.0.0",
     "lodash": "^4.17.20"
   },
   "devDependencies": {
