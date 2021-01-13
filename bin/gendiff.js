@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 import { Command } from 'commander';
 import path from 'path';
-import fs from 'fs';
 import genDiff from '../src/gendiff.js';
 
 const program = new Command();
@@ -14,9 +13,7 @@ program
   .action((filepath1, filepath2) => {
     const absolutePath1 = path.resolve(filepath1);
     const absolutePath2 = path.resolve(filepath2);
-    const data1 = fs.readFileSync(absolutePath1, 'utf-8');
-    const data2 = fs.readFileSync(absolutePath2, 'utf-8');
-    console.log(genDiff(data1, data2));
+    console.log(genDiff(absolutePath1, absolutePath2));
   });
 
 program.parse(process.argv);
