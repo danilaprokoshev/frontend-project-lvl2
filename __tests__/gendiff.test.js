@@ -9,32 +9,49 @@ const __dirname = path.dirname(__filename);
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8').trim();
 
-test('genDiff - general scenario', () => {
-  const json1 = readFile('file1.json');
-  const json2 = readFile('file2.json');
-  const expected = readFile('result-general-scenario.txt');
+test('genDiff - json - general scenario', () => {
+  const json1 = getFixturePath('file1.json');
+  const json2 = getFixturePath('file2.json');
+  const expected = readFile('result-json-general-scenario.txt');
   expect(genDiff(json1, json2)).toBe(expected);
 });
 
-test('genDiff - corner case #1 (empty jsons)', () => {
-  const actual = genDiff('{}', '{}');
-  expect(actual).toEqual('{}');
+test('genDiff - json - corner case #1 (empty files)', () => {
+  const json1 = getFixturePath('empty1.json');
+  const json2 = getFixturePath('empty2.json');
+  expect(genDiff(json1, json2)).toEqual('no differences');
 });
 
-test('genDiff - corner case #2 (first json is empty)', () => {
-  const actual = genDiff('{}', '{ "data": "info", "meta": "env" }');
-  const expected = `{
-  + data: info
-  + meta: env
-}`;
-  expect(actual).toEqual(expected);
+test('genDiff - json - corner case #2 (first json is empty)', () => {
+  const json1 = getFixturePath('empty1.json');
+  const json2 = getFixturePath('file3.json');
+  const expected = readFile('result-json-corner-case#2.txt');
+  expect(genDiff(json1, json2)).toEqual(expected);
 });
 
-test('genDiff - corner case #3 (second json is empty)', () => {
-  const actual = genDiff('{ "isLight": true, "brightness": 33 }', '{}');
-  const expected = `{
-  - brightness: 33
-  - isLight: true
-}`;
-  expect(actual).toEqual(expected);
+test('genDiff - json - corner case #3 (second json is empty)', () => {
+  const json1 = getFixturePath('file4.json');
+  const json2 = getFixturePath('empty2.json');
+  const expected = readFile('result-json-corner-case#3.txt');
+  expect(genDiff(json1, json2)).toEqual(expected);
+});
+
+test('genDiff - yaml - general scenario', () => {
+  const yaml1 = getFixturePath('file1.yml');
+  const yaml2 = getFixturePath('file2.yml');
+  const expected = readFile('result-yaml-general-scenario.txt');
+  expect(genDiff(yaml1, yaml2)).toBe(expected);
+});
+
+test('genDiff - yaml - corner case #4 (empty files)', () => {
+  const yaml1 = getFixturePath('empty1.yml');
+  const yaml2 = getFixturePath('empty2.yml');
+  expect(genDiff(yaml1, yaml2)).toEqual('no differences');
+});
+
+test('genDiff - corner case #5 (first yaml is empty)', () => {
+  const yaml1 = getFixturePath('empty1.yml');
+  const yaml2 = getFixturePath('file3.yml');
+  const expected = readFile('result-yaml-corner-case#5.txt');
+  expect(genDiff(yaml1, yaml2)).toEqual(expected);
 });
