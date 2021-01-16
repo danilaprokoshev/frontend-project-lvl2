@@ -43,15 +43,9 @@ test('genDiff - yaml - general scenario', () => {
   expect(genDiff(yaml1, yaml2)).toBe(expected);
 });
 
-test('genDiff - yaml - corner case #4 (empty files)', () => {
-  const yaml1 = getFixturePath('empty1.yml');
-  const yaml2 = getFixturePath('empty2.yml');
-  expect(genDiff(yaml1, yaml2)).toEqual('no differences');
-});
-
-test('genDiff - corner case #5 (first yaml is empty)', () => {
-  const yaml1 = getFixturePath('empty1.yml');
-  const yaml2 = getFixturePath('file3.yml');
-  const expected = readFile('result-yaml-corner-case#5.txt');
-  expect(genDiff(yaml1, yaml2)).toEqual(expected);
+test('genDiff - json - chaining structure', () => {
+  const json1 = getFixturePath('chaining-structure1.json');
+  const json2 = getFixturePath('chaining-structure2.json');
+  const expected = readFile('result-chaining-structure.txt');
+  expect(genDiff(json1, json2)).toBe(expected);
 });
