@@ -8,3 +8,6 @@
 
 ## Example of using package (on project step#5)
 [![asciicast](https://asciinema.org/a/LMyVxXGs9SckcYGkdyAsuBbub.svg)](https://asciinema.org/a/LMyVxXGs9SckcYGkdyAsuBbub)
+
+## Example of using package (on project step#6)
+[![asciicast](https://asciinema.org/a/6rF7VBXTWIT1DF1urrhUMTaoz.svg)](https://asciinema.org/a/6rF7VBXTWIT1DF1urrhUMTaoz)
