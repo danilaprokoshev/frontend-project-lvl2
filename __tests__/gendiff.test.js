@@ -50,9 +50,51 @@ test('genDiff - json - chaining structure', () => {
   expect(genDiff(json1, json2)).toBe(expected);
 });
 
+test('genDiff - yaml - chaining structure', () => {
+  const yaml1 = getFixturePath('chaining-structure1.yml');
+  const yaml2 = getFixturePath('chaining-structure2.yml');
+  const expected = readFile('result-chaining-structure.txt');
+  expect(genDiff(yaml1, yaml2)).toBe(expected);
+});
+
 test('genDiff - json - plain format - general scenario', () => {
   const json1 = getFixturePath('chaining-structure1.json');
   const json2 = getFixturePath('chaining-structure2.json');
   const expected = readFile('result-chaining-structure-plain.txt');
   expect(genDiff(json1, json2, 'plain')).toBe(expected);
+});
+
+test('genDiff - yaml - plain format - chaining structure', () => {
+  const yaml1 = getFixturePath('chaining-structure1.yml');
+  const yaml2 = getFixturePath('chaining-structure2.yml');
+  const expected = readFile('result-chaining-structure-plain.txt');
+  expect(genDiff(yaml1, yaml2, 'plain')).toBe(expected);
+});
+
+test('genDiff - json format - json files given', () => {
+  const json1 = getFixturePath('chaining-structure1.json');
+  const json2 = getFixturePath('chaining-structure2.json');
+  const expected = readFile('result-json-format.json');
+  expect(genDiff(json1, json2, 'json')).toBe(expected);
+});
+
+test('genDiff - stylish format - comparing json & yaml', () => {
+  const json = getFixturePath('chaining-structure1.json');
+  const yaml = getFixturePath('chaining-structure2.yml');
+  const expected = readFile('result-chaining-structure.txt');
+  expect(genDiff(json, yaml)).toBe(expected);
+});
+
+test('genDiff - plain format - comparing json & yaml', () => {
+  const json = getFixturePath('chaining-structure2.json');
+  const yaml = getFixturePath('chaining-structure1.yml');
+  const expected = readFile('result-chaining-structure-plain.txt');
+  expect(genDiff(yaml, json, 'plain')).toBe(expected);
+});
+
+test('genDiff - json - chaining structure - replace arguments', () => {
+  const json1 = getFixturePath('chaining-structure1.json');
+  const json2 = getFixturePath('chaining-structure2.json');
+  const expected = readFile('result-chaining-structure.txt');
+  expect(genDiff(json2, json1)).not.toBe(expected);
 });
