@@ -16,4 +16,4 @@ program
     console.log(genDiff(absolutePath1, absolutePath2, program.format));
   });
 
-program.parse(process.argv);
+program.parse();
