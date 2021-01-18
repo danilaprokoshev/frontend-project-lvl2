@@ -49,3 +49,10 @@ test('genDiff - json - chaining structure', () => {
   const expected = readFile('result-chaining-structure.txt');
   expect(genDiff(json1, json2)).toBe(expected);
 });
+
+test('genDiff - json - plain format - general scenario', () => {
+  const json1 = getFixturePath('chaining-structure1.json');
+  const json2 = getFixturePath('chaining-structure2.json');
+  const expected = readFile('result-chaining-structure-plain.txt');
+  expect(genDiff(json1, json2, 'plain')).toBe(expected);
+});
