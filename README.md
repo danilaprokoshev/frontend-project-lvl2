@@ -67,3 +67,6 @@ Property 'group3' was added with value: [complex value]
 
 #### Example of using package (on project step#7)
 [![asciicast](https://asciinema.org/a/auhoGKw7JeXK02XzMtFAsuy9T.svg)](https://asciinema.org/a/auhoGKw7JeXK02XzMtFAsuy9T)
+
+#### Example of using package (on project step#8)
+[![asciicast](https://asciinema.org/a/D5MPwlI8lIZ6J9EUTrA2cI6Wn.svg)](https://asciinema.org/a/D5MPwlI8lIZ6J9EUTrA2cI6Wn)
