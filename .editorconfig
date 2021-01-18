@@ -16,6 +16,9 @@ trim_trailing_whitespace = false
 [*.txt]
 trim_trailing_whitespace = false
 
+[*.yml]
+trim_trailing_whitespace = false
+
 [*.{js, jsx, ts, tsx}]
 trim_trailing_whitespace = true
 
