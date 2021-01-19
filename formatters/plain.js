@@ -19,8 +19,6 @@ const plain = (diffTree) => {
     if (!_.has(el, 'children')) {
       switch (el.status) {
         case 'added':
-          console.log(el.key);
-          console.log(path);
           return acc.concat('Property ', `'${path.join('')}${el.key}'`, ' was added with value: ', printValue(el.value), '\n');
         case 'deleted':
           return acc.concat('Property ', `'${path.join('')}${el.key}'`, ' was removed', '\n');
