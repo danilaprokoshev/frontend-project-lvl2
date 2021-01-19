@@ -2,7 +2,7 @@ import parse from './parsers.js';
 import format from '../formatters/index.js';
 import buildDiff from './builddiff.js';
 
-const genDiff = (filepath1, filepath2, formatName = 'stylish') => {
+export default (filepath1, filepath2, formatName = 'stylish') => {
   const obj1 = parse(filepath1);
   const obj2 = parse(filepath2);
 
@@ -15,5 +15,3 @@ const genDiff = (filepath1, filepath2, formatName = 'stylish') => {
 
   return format(diff, formatName);
 };
-
-export default genDiff;
