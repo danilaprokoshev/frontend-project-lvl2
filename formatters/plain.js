@@ -15,10 +15,12 @@ const printValue = (value) => {
 };
 
 const plain = (diffTree) => {
-  const iter = (tree, ...path) => tree.reduce((acc, el) => {
+  const iter = (tree, path) => tree.reduce((acc, el) => {
     if (!_.has(el, 'children')) {
       switch (el.status) {
         case 'added':
+          console.log(el.key);
+          console.log(path);
           return acc.concat('Property ', `'${path.join('')}${el.key}'`, ' was added with value: ', printValue(el.value), '\n');
         case 'deleted':
           return acc.concat('Property ', `'${path.join('')}${el.key}'`, ' was removed', '\n');
@@ -29,10 +31,10 @@ const plain = (diffTree) => {
       }
     }
 
-    return acc.concat(iter(el.children, ...path, `${el.key}.`));
+    return acc.concat(iter(el.children, path.concat(`${el.key}.`)));
   }, '');
 
-  return iter(diffTree, '').trim();
+  return iter(diffTree, []).trim();
 };
 
 export default plain;
