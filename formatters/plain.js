@@ -29,7 +29,7 @@ const plain = (diffTree) => {
       }
     }
 
-    return acc.concat(iter(el.children, path.concat(`${el.key}.`)));
+    return acc.concat(iter(el.children, path.concat(el.key, '.')));
   }, '');
 
   return iter(diffTree, []).trim();
