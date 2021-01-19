@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import pkg from 'commander';
 import path from 'path';
-import genDiff from '../src/gendiff.js';
+import genDiff from '../src/index.js';
 
 const { Command } = pkg;
 const program = new Command();
