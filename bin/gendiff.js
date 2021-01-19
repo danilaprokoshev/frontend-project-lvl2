@@ -14,6 +14,7 @@ program
     const absolutePath1 = path.resolve(filepath1);
     const absolutePath2 = path.resolve(filepath2);
     console.log(genDiff(absolutePath1, absolutePath2, program.format));
-  });
+  })
+  .parse(process.argv);
 
 program.parse(process.argv);
