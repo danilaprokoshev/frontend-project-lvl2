@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 const printValue = (value) => {
   if (value === null) {
     return 'null';
@@ -14,25 +12,28 @@ const printValue = (value) => {
   }
 };
 
-const plain = (diffTree) => {
-  const iter = (tree, path) => tree.reduce((acc, node) => {
-    if (!_.has(node, 'children')) {
-      switch (node.type) {
-        case 'added':
-          return acc.concat('Property ', `'${path.join('')}${node.key}'`, ' was added with value: ', printValue(node.value), '\n');
-        case 'deleted':
-          return acc.concat('Property ', `'${path.join('')}${node.key}'`, ' was removed', '\n');
-        case 'changed':
-          return acc.concat('Property ', `'${path.join('')}${node.key}'`, ' was updated. From ', printValue(node.previousValue), ' to ', printValue(node.value), '\n');
-        default:
-          return acc;
+const plain = (diff) => {
+  const iter = (tree, path) => tree
+    .map((node) => {
+      if (node.type !== 'nest') {
+        switch (node.type) {
+          case 'added':
+            return `Property '${path.join('')}${node.key}' was added with value: ${printValue(node.value)}`;
+          case 'deleted':
+            return `Property '${path.join('')}${node.key}' was removed`;
+          case 'changed':
+            return `Property '${path.join('')}${node.key}' was updated. From ${printValue(node.previousValue)} to ${printValue(node.value)}`;
+          default:
+            return null;
+        }
       }
-    }
 
-    return acc.concat(iter(node.children, path.concat(node.key, '.')));
-  }, '');
+      return `${iter(node.children, path.concat(node.key, '.'))}`;
+    })
+    .filter((n) => n)
+    .join('\n');
 
-  return iter(diffTree, []).trim();
+  return iter(diff, []).trim();
 };
 
 export default plain;
