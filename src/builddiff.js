@@ -11,7 +11,7 @@ const buildDiff = (obj1, obj2) => {
       if (_.isPlainObject(obj1[key]) && _.isPlainObject(obj2[key])) {
         const children = buildDiff(obj1[key], obj2[key]);
 
-        return { key, children };
+        return { key, type: 'nest', children };
       }
       if (!_.has(obj1, key)) {
         return {
