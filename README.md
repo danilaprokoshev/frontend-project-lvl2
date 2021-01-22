@@ -56,17 +56,5 @@ Property 'group3' was added with value: [complex value]
 2. In the root directory: ```$ make install```.
 3. To install the package in your OS: ```$ npm link``` from the root directory.
 
-**Example of using package (on project step#3)**
-[![asciicast](https://asciinema.org/a/lnG4ZhpGgTZellhDpxFuoQZgu.svg)](https://asciinema.org/a/lnG4ZhpGgTZellhDpxFuoQZgu)
-
-**Example of using package (on project step#5)**
-[![asciicast](https://asciinema.org/a/o6c78yhJgCzNTkta8fmt0dRUC.svg)](https://asciinema.org/a/o6c78yhJgCzNTkta8fmt0dRUC)
-
-**Example of using package (on project step#6)**
-[![asciicast](https://asciinema.org/a/6rF7VBXTWIT1DF1urrhUMTaoz.svg)](https://asciinema.org/a/6rF7VBXTWIT1DF1urrhUMTaoz)
-
-**Example of using package (on project step#7)**
-[![asciicast](https://asciinema.org/a/auhoGKw7JeXK02XzMtFAsuy9T.svg)](https://asciinema.org/a/auhoGKw7JeXK02XzMtFAsuy9T)
-
-**Example of using package (on project step#8)**
-[![asciicast](https://asciinema.org/a/D5MPwlI8lIZ6J9EUTrA2cI6Wn.svg)](https://asciinema.org/a/D5MPwlI8lIZ6J9EUTrA2cI6Wn)
+**Example of using package**
+[![asciicast](https://asciinema.org/a/gaxZPedOF7zxegM8cP9vZ4Nwt.svg)](https://asciinema.org/a/gaxZPedOF7zxegM8cP9vZ4Nwt)
