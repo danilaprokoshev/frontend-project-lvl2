@@ -15,22 +15,22 @@ const buildDiff = (obj1, obj2) => {
       }
       if (!_.has(obj1, key)) {
         return {
-          key, value: obj2[key], status: 'added',
+          key, value: obj2[key], type: 'added',
         };
       }
       if (!_.has(obj2, key)) {
         return {
-          key, value: obj1[key], status: 'deleted',
+          key, value: obj1[key], type: 'deleted',
         };
       }
-      if (JSON.stringify(obj1[key]) !== JSON.stringify(obj2[key])) {
+      if (!_.isEqual(obj1[key], obj2[key])) {
         return {
-          key, value: obj2[key], previousValue: obj1[key], status: 'changed',
+          key, value: obj2[key], previousValue: obj1[key], type: 'changed',
         };
       }
 
       return {
-        key, value: obj1[key], status: 'unchanged',
+        key, value: obj1[key], type: 'unchanged',
       };
     });
 };
