@@ -1,9 +1,0 @@
-{
-  - band: Led Zeppelin
-  + band: Porcupine Tree
-  - firstAlbum: Led Zeppelin I
-  - foundedOn: 1968
-  + foundedOn: 1991
-  + lastAlbum: One
-    style: rock
-}

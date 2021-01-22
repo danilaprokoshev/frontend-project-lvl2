@@ -1,4 +1,0 @@
-{
-  - brightness: 33
-  - isLight: true
-}
