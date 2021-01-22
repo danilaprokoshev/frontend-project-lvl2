@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 import pkg from 'commander';
-import path from 'path';
 import genDiff from '../src/index.js';
 
 const { Command } = pkg;
@@ -13,9 +12,7 @@ program
   .allowUnknownOption()
   .option('-f, --format [type]', 'output format', 'stylish')
   .action((filepath1, filepath2) => {
-    const absolutePath1 = path.resolve(filepath1);
-    const absolutePath2 = path.resolve(filepath2);
-    console.log(genDiff(absolutePath1, absolutePath2, program.format));
+    console.log(genDiff(filepath1, filepath2, program.format));
   });
 
 program.parse(process.argv);
