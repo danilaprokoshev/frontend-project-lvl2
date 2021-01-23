@@ -24,11 +24,9 @@ const plain = (diff) => {
       if (node.type === 'added') {
         return `Property '${path.join('')}${node.key}' was added with value: ${printValue(node.value)}`;
       }
-      if (node.type === 'deleted') {
-        return `Property '${path.join('')}${node.key}' was removed`;
-      }
-
-      return `Property '${path.join('')}${node.key}' was updated. From ${printValue(node.previousValue)} to ${printValue(node.value)}`;
+      return (node.type === 'deleted')
+        ? `Property '${path.join('')}${node.key}' was removed`
+        : `Property '${path.join('')}${node.key}' was updated. From ${printValue(node.previousValue)} to ${printValue(node.value)}`;
     })
     .filter((n) => n)
     .join('\n');

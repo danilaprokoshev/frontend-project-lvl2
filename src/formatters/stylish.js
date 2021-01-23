@@ -34,11 +34,9 @@ const stylish = (diff) => {
       if (node.type === 'deleted') {
         return printTransposedItem(node.key, node.value, '-', depth);
       }
-      if (node.type === 'changed') {
-        return printTransposedItem(node.key, node.previousValue, '-', depth).concat('\n', printTransposedItem(node.key, node.value, '+', depth));
-      }
-
-      return `${indent(depth)}  ${node.key}: ${node.value}`;
+      return (node.type === 'changed')
+        ? printTransposedItem(node.key, node.previousValue, '-', depth).concat('\n', printTransposedItem(node.key, node.value, '+', depth))
+        : `${indent(depth)}  ${node.key}: ${node.value}`;
     })
     .join('\n');
 
