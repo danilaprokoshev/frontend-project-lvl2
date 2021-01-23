@@ -23,21 +23,20 @@ const printObject = (object, depth) => {
 const stylish = (diff) => {
   const iter = (tree, depth) => tree
     .map((node) => {
-      if (node.type !== 'nest') {
-        switch (node.type) {
-          case 'added':
-            return `${indent(depth)}+ ${node.key}: ${(_.isPlainObject(node.value)) ? printObject(node.value, depth + 1) : node.value}`;
-          case 'deleted':
-            return `${indent(depth)}- ${node.key}: ${(_.isPlainObject(node.value)) ? printObject(node.value, depth + 1) : node.value}`;
-          case 'changed':
-            return `${indent(depth)}- ${node.key}: ${(_.isPlainObject(node.previousValue)) ? printObject(node.previousValue, depth + 1) : node.previousValue}\n${indent(depth)}+ ${node.key}: ${(_.isPlainObject(node.value)) ? printObject(node.value, depth + 1) : node.value}`;
-          case 'unchanged':
-            return `${indent(depth)}  ${node.key}: ${node.value}`;
-          default:
-        }
+      if (node.type === 'nest') {
+        return `${indent(depth)}  ${node.key}: {\n${iter(node.children, depth + 2)}\n  ${indent(depth)}}`;
+      }
+      if (node.type === 'added') {
+        return `${indent(depth)}+ ${node.key}: ${(_.isPlainObject(node.value)) ? printObject(node.value, depth + 1) : node.value}`;
+      }
+      if (node.type === 'deleted') {
+        return `${indent(depth)}- ${node.key}: ${(_.isPlainObject(node.value)) ? printObject(node.value, depth + 1) : node.value}`;
+      }
+      if (node.type === 'changed') {
+        return `${indent(depth)}- ${node.key}: ${(_.isPlainObject(node.previousValue)) ? printObject(node.previousValue, depth + 1) : node.previousValue}\n${indent(depth)}+ ${node.key}: ${(_.isPlainObject(node.value)) ? printObject(node.value, depth + 1) : node.value}`;
       }
 
-      return `${indent(depth)}  ${node.key}: {\n${iter(node.children, depth + 2)}\n  ${indent(depth)}}`;
+      return `${indent(depth)}  ${node.key}: ${node.value}`;
     })
     .join('\n');
 

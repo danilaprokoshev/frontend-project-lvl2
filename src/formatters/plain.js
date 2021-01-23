@@ -15,20 +15,20 @@ const printValue = (value) => {
 const plain = (diff) => {
   const iter = (tree, path) => tree
     .map((node) => {
-      if (node.type !== 'nest') {
-        switch (node.type) {
-          case 'added':
-            return `Property '${path.join('')}${node.key}' was added with value: ${printValue(node.value)}`;
-          case 'deleted':
-            return `Property '${path.join('')}${node.key}' was removed`;
-          case 'changed':
-            return `Property '${path.join('')}${node.key}' was updated. From ${printValue(node.previousValue)} to ${printValue(node.value)}`;
-          default:
-            return null;
-        }
+      if (node.type === 'nest') {
+        return `${iter(node.children, path.concat(node.key, '.'))}`;
+      }
+      if (node.type === 'added') {
+        return `Property '${path.join('')}${node.key}' was added with value: ${printValue(node.value)}`;
+      }
+      if (node.type === 'deleted') {
+        return `Property '${path.join('')}${node.key}' was removed`;
+      }
+      if (node.type === 'changed') {
+        return `Property '${path.join('')}${node.key}' was updated. From ${printValue(node.previousValue)} to ${printValue(node.value)}`;
       }
 
-      return `${iter(node.children, path.concat(node.key, '.'))}`;
+      return null;
     })
     .filter((n) => n)
     .join('\n');
