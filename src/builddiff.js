@@ -1,12 +1,9 @@
 import _ from 'lodash';
 
 const buildDiff = (obj1, obj2) => {
-  const keys1 = _.keys(obj1);
-  const keys2 = _.keys(obj2);
-  const keys = _.union(keys1, keys2);
-  const sortedKeys = _.sortBy(keys);
+  const keys = _.sortBy((_.union(_.keys(obj1), _.keys(obj2))));
 
-  return sortedKeys
+  return keys
     .map((key) => {
       if (_.isPlainObject(obj1[key]) && _.isPlainObject(obj2[key])) {
         const children = buildDiff(obj1[key], obj2[key]);
@@ -23,14 +20,14 @@ const buildDiff = (obj1, obj2) => {
           key, value: obj1[key], type: 'deleted',
         };
       }
-      if (!_.isEqual(obj1[key], obj2[key])) {
+      if (_.isEqual(obj1[key], obj2[key])) {
         return {
-          key, value: obj2[key], previousValue: obj1[key], type: 'changed',
+          key, value: obj1[key], type: 'unchanged',
         };
       }
 
       return {
-        key, value: obj1[key], type: 'unchanged',
+        key, value: obj2[key], previousValue: obj1[key], type: 'changed',
       };
     });
 };
