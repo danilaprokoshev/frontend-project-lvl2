@@ -19,7 +19,6 @@ const buildDiff = (obj1, obj2) => {
           key, value: obj1[key], type: 'deleted',
         };
       }
-
       return (_.isEqual(obj1[key], obj2[key])) ? {
         key, value: obj1[key], type: 'unchanged',
       } : {
