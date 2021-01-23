@@ -57,4 +57,5 @@ Property 'group3' was added with value: [complex value]
 3. To install the package in your OS: ```$ npm link``` from the root directory.
 
 **Example of using package**
-<script id="asciicast-6sl0K1bc3URBYzV2UXPInLXJ0" src="https://asciinema.org/a/6sl0K1bc3URBYzV2UXPInLXJ0.js" async></script>
+
+[![asciicast](https://asciinema.org/a/6sl0K1bc3URBYzV2UXPInLXJ0.svg)](https://asciinema.org/a/6sl0K1bc3URBYzV2UXPInLXJ0)
