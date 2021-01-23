@@ -15,6 +15,9 @@ const printValue = (value) => {
 const plain = (diff) => {
   const iter = (tree, path) => tree
     .map((node) => {
+      if (node.type === 'unchanged') {
+        return null;
+      }
       if (node.type === 'nest') {
         return `${iter(node.children, path.concat(node.key, '.'))}`;
       }
@@ -24,11 +27,8 @@ const plain = (diff) => {
       if (node.type === 'deleted') {
         return `Property '${path.join('')}${node.key}' was removed`;
       }
-      if (node.type === 'changed') {
-        return `Property '${path.join('')}${node.key}' was updated. From ${printValue(node.previousValue)} to ${printValue(node.value)}`;
-      }
 
-      return null;
+      return `Property '${path.join('')}${node.key}' was updated. From ${printValue(node.previousValue)} to ${printValue(node.value)}`;
     })
     .filter((n) => n)
     .join('\n');
