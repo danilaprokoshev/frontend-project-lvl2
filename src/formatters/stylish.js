@@ -28,15 +28,16 @@ const stylish = (diff) => {
       if (node.type === 'nest') {
         return `${indent(depth)}  ${node.key}: {\n${iter(node.children, depth + 2)}\n  ${indent(depth)}}`;
       }
-      if (node.type === 'added') {
-        return printTransposedItem(node.key, node.value, '+', depth);
+      switch (node.type) {
+        case 'added':
+          return printTransposedItem(node.key, node.value, '+', depth);
+        case 'deleted':
+          return printTransposedItem(node.key, node.value, '-', depth);
+        case 'changed':
+          return printTransposedItem(node.key, node.previousValue, '-', depth).concat('\n', printTransposedItem(node.key, node.value, '+', depth));
+        default:
+          return `${indent(depth)}  ${node.key}: ${node.value}`;
       }
-      if (node.type === 'deleted') {
-        return printTransposedItem(node.key, node.value, '-', depth);
-      }
-      return (node.type === 'changed')
-        ? printTransposedItem(node.key, node.previousValue, '-', depth).concat('\n', printTransposedItem(node.key, node.value, '+', depth))
-        : `${indent(depth)}  ${node.key}: ${node.value}`;
     })
     .join('\n');
 
