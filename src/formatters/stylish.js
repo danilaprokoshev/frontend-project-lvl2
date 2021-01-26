@@ -2,7 +2,7 @@ import _ from 'lodash';
 
 const indent = (count) => '  '.repeat(count);
 
-const printObject = (object, depth) => {
+const stringifyObject = (object, depth) => {
   const iter = (innerObject, innerDepth) => {
     const entries = Object.entries(innerObject);
     return entries
@@ -20,7 +20,7 @@ const printObject = (object, depth) => {
   return `{\n${iter(object, depth)}\n${indent(depth)}}`;
 };
 
-const printTransposedItem = (key, value, sign, depth) => `${indent(depth)}${sign} ${key}: ${(_.isPlainObject(value)) ? printObject(value, depth + 1) : value}`;
+const stringifyTransposedItem = (key, value, sign, depth) => `${indent(depth)}${sign} ${key}: ${(_.isPlainObject(value)) ? stringifyObject(value, depth + 1) : value}`;
 
 const stylish = (diff) => {
   const iter = (tree, depth) => tree
@@ -30,11 +30,11 @@ const stylish = (diff) => {
       }
       switch (node.type) {
         case 'added':
-          return printTransposedItem(node.key, node.value, '+', depth);
+          return stringifyTransposedItem(node.key, node.value, '+', depth);
         case 'deleted':
-          return printTransposedItem(node.key, node.value, '-', depth);
+          return stringifyTransposedItem(node.key, node.value, '-', depth);
         case 'changed':
-          return printTransposedItem(node.key, node.previousValue, '-', depth).concat('\n', printTransposedItem(node.key, node.value, '+', depth));
+          return stringifyTransposedItem(node.key, node.previousValue, '-', depth).concat('\n', stringifyTransposedItem(node.key, node.value, '+', depth));
         default:
           return `${indent(depth)}  ${node.key}: ${node.value}`;
       }
